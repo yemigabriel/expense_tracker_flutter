@@ -15,7 +15,10 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Home",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         actions: [
           IconButton(
@@ -48,7 +51,7 @@ class HomeScreen extends StatelessWidget {
   void showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       builder: (context) {
         return SizedBox(
           child: Padding(
@@ -113,7 +116,7 @@ class ExpenseListView extends StatelessWidget {
           ),
           child: ListTile(
             title: Text(
-              "\$${viewModel.expenses[index].amount.toStringAsFixed(2)}",
+              viewModel.moneyFormat.format(viewModel.expenses[index].amount),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.primary,
@@ -122,7 +125,7 @@ class ExpenseListView extends StatelessWidget {
             subtitle: Text(viewModel.expenses[index].title),
             trailing: Text(
               "${viewModel.expenses[index].category.name} \n${viewModel.expenses[index].date.toLocal().toIso8601String().split('T').first}",
-              style: TextStyle(color: Colors.grey[600]),
+              style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             ),
           ),
         );

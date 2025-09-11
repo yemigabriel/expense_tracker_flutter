@@ -1,6 +1,7 @@
 import 'package:expense_tracker/views/charts_screen.dart';
 import 'package:expense_tracker/views/home_screen.dart';
 import 'package:expense_tracker/views/insights_screen.dart';
+import 'package:expense_tracker/views/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabView extends StatefulWidget {
@@ -15,18 +16,12 @@ class _MainTabViewState extends State<MainTabView> {
   final List<Map<String, dynamic>> tabs = [
     {'title': 'Home', 'screen': HomeScreen()},
     {'title': 'Insights', 'screen': InsightsScreen()},
-    {'title': 'Charts', 'screen': ChartsScreen()},
+    {'title': 'Settings', 'screen': SettingsScreen()},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(
-      //     tabs[currentPageIndex]["title"],
-      //     style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
-      //   ),
-      // ),
       body: tabs[currentPageIndex]["screen"],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPageIndex,
@@ -45,8 +40,8 @@ class _MainTabViewState extends State<MainTabView> {
             label: "Insights",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            label: "Charts",
+            icon: Icon(Icons.settings_outlined),
+            label: "Settings",
           ),
         ],
       ),

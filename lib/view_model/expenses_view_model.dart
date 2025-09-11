@@ -1,13 +1,19 @@
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/services/app_db.dart';
 import 'package:flutter/foundation.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpensesViewModel extends ChangeNotifier {
   final AppDb _appDb;
   final List<Expense> _expenses = [];
   List<Expense> get expenses => _expenses;
+  String _currencyCode;
+  String get currencyCode => _currencyCode;
+  NumberFormat get moneyFormat => NumberFormat.currency(name: _currencyCode);
 
-  ExpensesViewModel(this._appDb) {
+  ExpensesViewModel(this._appDb, {required String currencyCode})
+    : _currencyCode = currencyCode {
     _appDb.watchAllExpenses().listen((items) {
       _expenses
         ..clear()
@@ -15,6 +21,18 @@ class ExpensesViewModel extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+void setCurrency(String code) {
+    if (_currencyCode == code) return;
+    _currencyCode = code;
+    notifyListeners(); // UI can reformat amounts
+  }
+
+  // Future<void> loadCurrency() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   _currencyCode = prefs.getString('currency_code') ?? 'NGN';
+  //   notifyListeners();
+  // }
 
   double get totalAmount {
     return _expenses.fold(0, (sum, expense) => sum + expense.amount);
