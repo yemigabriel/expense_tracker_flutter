@@ -1,7 +1,7 @@
-import 'package:expense_tracker/views/charts_screen.dart';
-import 'package:expense_tracker/views/home_screen.dart';
-import 'package:expense_tracker/views/insights_screen.dart';
-import 'package:expense_tracker/views/settings_screen.dart';
+import 'package:expense_tracker/features/insights/view/charts_screen.dart';
+import 'package:expense_tracker/features/expenses/view/home_screen.dart';
+import 'package:expense_tracker/features/insights/view/insights_screen.dart';
+import 'package:expense_tracker/features/settings/view/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainTabView extends StatefulWidget {

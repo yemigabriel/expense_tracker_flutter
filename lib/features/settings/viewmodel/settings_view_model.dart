@@ -14,6 +14,15 @@ class SettingsViewModel extends ChangeNotifier {
   ThemeMode get themeMode => _themeMode;
   String get currencyCode => _currencyCode ?? 'NGN';
 
+  final kCurrencies = <String, String>{
+    'USD': '\$',
+    'NGN': '₦',
+    'EUR': '€',
+    'GBP': '£',
+    'EGP': 'E£',
+    'JPY': '¥',
+  };
+
   void init() {
     _themeMode =
         _parseMode(_prefs.getString(_themeModeKey)) ?? ThemeMode.system;
@@ -59,4 +68,16 @@ class SettingsViewModel extends ChangeNotifier {
         return null;
     }
   }
+
+  String themeLabel() {
+    switch (_themeMode) {
+      case ThemeMode.system:
+        return 'System';
+      case ThemeMode.light:
+        return 'Light';
+      case ThemeMode.dark:
+        return 'Dark';
+    }
+  }
 }
+

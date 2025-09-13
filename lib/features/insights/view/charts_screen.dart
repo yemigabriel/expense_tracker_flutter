@@ -1,6 +1,6 @@
-import 'package:expense_tracker/view_model/expenses_view_model.dart';
-import 'package:expense_tracker/views/charts/bar_chart.dart';
-import 'package:expense_tracker/views/charts/donut_chart.dart';
+import 'package:expense_tracker/features/expenses/viewmodel/expenses_view_model.dart';
+import 'package:expense_tracker/features/insights/view/bar_chart.dart';
+import 'package:expense_tracker/features/insights/view/donut_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

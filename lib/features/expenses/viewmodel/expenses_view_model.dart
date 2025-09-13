@@ -2,7 +2,6 @@ import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/services/app_db.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ExpensesViewModel extends ChangeNotifier {
   final AppDb _appDb;

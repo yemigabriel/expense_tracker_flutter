@@ -1,8 +1,9 @@
 import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/services/app_db.dart';
-import 'package:expense_tracker/view_model/expenses_view_model.dart';
-import 'package:expense_tracker/view_model/settings_view_model.dart';
-import 'package:expense_tracker/views/main_tab_view.dart';
+import 'package:expense_tracker/features/expenses/viewmodel/expenses_view_model.dart';
+import 'package:expense_tracker/features/insights/viewmodel/insights_view_model.dart';
+import 'package:expense_tracker/features/settings/viewmodel/settings_view_model.dart';
+import 'package:expense_tracker/main_tab_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,19 +33,39 @@ void main() async {
           create: (context) => SettingsViewModel(prefs)..init(),
         ),
         ChangeNotifierProxyProvider<SettingsViewModel, ExpensesViewModel>(
-          create: (ctx) => ExpensesViewModel(
-            ctx.read<AppDb>(),
-            currencyCode: ctx.read<SettingsViewModel>().currencyCode,
+          create: (context) => ExpensesViewModel(
+            context.read<AppDb>(),
+            currencyCode: context.read<SettingsViewModel>().currencyCode,
           ),
-          update: (ctx, settings, vm) {
-            vm ??= ExpensesViewModel(
-              ctx.read<AppDb>(),
-              currencyCode: settings.currencyCode,
+          update: (context, settingsVm, expensesVm) {
+            expensesVm ??= ExpensesViewModel(
+              context.read<AppDb>(),
+              currencyCode: settingsVm.currencyCode,
             );
-            vm.setCurrency(settings.currencyCode);
-            return vm;
+            expensesVm.setCurrency(settingsVm.currencyCode);
+            return expensesVm;
           },
         ),
+        ChangeNotifierProxyProvider2<
+          ExpensesViewModel,
+          SettingsViewModel,
+          InsightsViewModel
+        >(
+          create: (_) => InsightsViewModel(),
+          update: (context, expensesVm, settingsVm, insightsVm) {
+            insightsVm ??= InsightsViewModel();
+            insightsVm.update(
+              expenses: expensesVm.expenses,
+              currencyCode: settingsVm.currencyCode,
+            );
+            return insightsVm;
+          },
+        ),
+
+        //   ChangeNotifierProvider<InsightsViewModel>(
+        //     create: (context) =>
+        //         InsightsViewModel(context.read<ExpensesViewModel>().expenses),
+        //   ),
       ],
       child: const MyApp(),
     ),
