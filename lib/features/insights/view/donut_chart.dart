@@ -2,10 +2,16 @@ import 'package:expense_tracker/models/donut_chart_data.dart';
 import 'package:expense_tracker/models/expense.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DonutCategoryChart extends StatelessWidget {
+  final NumberFormat moneyFmt;
   final List<Expense> expenses;
-  const DonutCategoryChart({super.key, required this.expenses});
+  const DonutCategoryChart({
+    super.key,
+    required this.expenses,
+    required this.moneyFmt,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +70,7 @@ class DonutCategoryChart extends StatelessWidget {
             for (var i = 0; i < data.length; i++)
               _LegendDot(
                 color: colors[i % colors.length],
-                label: '${data[i].label} — ${data[i].total.toStringAsFixed(2)}',
+                label: '${data[i].label} — ${moneyFmt.format(data[i].total)}',
               ),
           ],
         ),

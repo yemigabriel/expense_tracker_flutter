@@ -2,10 +2,13 @@ import 'package:expense_tracker/features/expenses/viewmodel/expenses_view_model.
 import 'package:expense_tracker/features/insights/view/bar_chart.dart';
 import 'package:expense_tracker/features/insights/view/donut_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ChartsScreen extends StatelessWidget {
-  const ChartsScreen({super.key});
+  final NumberFormat moneyFmt;
+
+  const ChartsScreen({super.key, required this.moneyFmt});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class ChartsScreen extends StatelessWidget {
         Card.outlined(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: DonutCategoryChart(expenses: expenses),
+            child: DonutCategoryChart(expenses: expenses, moneyFmt: moneyFmt),
           ),
         ),
         Text(

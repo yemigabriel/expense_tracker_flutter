@@ -8,19 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   final appDb = AppDb();
-//   runApp(
-//     MultiProvider(
-//       providers: [
-//         ChangeNotifierProvider(create: (_) => ExpensesViewModel(appDb)),
-//         ChangeNotifierProvider(create: (_) => SettingsViewModel()),
-//       ],
-//       child: const MyApp(),
-//     ),
-//   );
-// }
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
@@ -40,9 +27,12 @@ void main() async {
           update: (context, settingsVm, expensesVm) {
             expensesVm ??= ExpensesViewModel(
               context.read<AppDb>(),
-              currencyCode: settingsVm.currencyCode,
+              currencyCode:
+                  settingsVm.kCurrencies[settingsVm.currencyCode] ?? 'NGN',
             );
-            expensesVm.setCurrency(settingsVm.currencyCode);
+            expensesVm.setCurrency(
+              settingsVm.kCurrencies[settingsVm.currencyCode] ?? 'NGN',
+            );
             return expensesVm;
           },
         ),
@@ -56,16 +46,12 @@ void main() async {
             insightsVm ??= InsightsViewModel();
             insightsVm.update(
               expenses: expensesVm.expenses,
-              currencyCode: settingsVm.currencyCode,
+              currencyCode:
+                  settingsVm.kCurrencies[settingsVm.currencyCode] ?? 'NGN',
             );
             return insightsVm;
           },
         ),
-
-        //   ChangeNotifierProvider<InsightsViewModel>(
-        //     create: (context) =>
-        //         InsightsViewModel(context.read<ExpensesViewModel>().expenses),
-        //   ),
       ],
       child: const MyApp(),
     ),

@@ -57,7 +57,7 @@ class InsightsScreen extends StatelessWidget {
                 crossAxisSpacing: 12,
                 childAspectRatio: 1.5,
                 children: [
-                  card('Monthly Total', vm.monthTotal().toStringAsFixed(2)),
+                  card('Monthly Total', vm.moneyFmt.format(vm.monthTotal())),
                   card(
                     'Biggest Category',
                     vm.biggestCategoryThisMonth().category,
@@ -66,7 +66,7 @@ class InsightsScreen extends StatelessWidget {
                   ),
                   card(
                     'Most Expensive Day',
-                    vm.mostExpensiveDayThisMonth().total.toStringAsFixed(2),
+                    vm.moneyFmt.format(vm.mostExpensiveDayThisMonth().total),
                     sub: vm
                         .mostExpensiveDayThisMonth()
                         .day
@@ -79,7 +79,7 @@ class InsightsScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 25),
-              ChartsScreen(),
+              ChartsScreen(moneyFmt: vm.moneyFmt),
             ],
           ),
         ),
