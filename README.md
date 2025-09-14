@@ -1,16 +1,20 @@
-# expense_tracker
+# Expense Tracker (Flutter)
 
-A new Flutter project.
+A simple personal expense tracker built with Flutter.  
+It uses MVVM and Provider, stores data locally with Drift (SQLite).
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Add/delete expenses.
+- Insights and charts
+- Dark/Light theme.
+- Currency selection (saved locally).
+- Local storage with Drift.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Screenshots
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img width="480" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-14 at 09 28 04" src="https://github.com/user-attachments/assets/8adde693-7477-49e6-8e7c-5462b08d545a" />
+<img width="480" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-14 at 09 27 56" src="https://github.com/user-attachments/assets/3a15112a-f535-4f35-b945-894424b0806f" />
+<img width="480" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-14 at 09 31 38" src="https://github.com/user-attachments/assets/a1be445b-55a8-4c03-98c4-bce17f07b8a8" />
+<img width="480" alt="Simulator Screenshot - iPhone 16 Pro - 2025-09-14 at 09 31 47" src="https://github.com/user-attachments/assets/0cca78ff-42aa-4ec6-bc18-15ff36567a05" />
